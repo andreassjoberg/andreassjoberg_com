@@ -2,11 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Andreas Sjöberg" />
+    <meta
+      name="keywords"
+      content="Andreas Sjöberg, Andreas, Sjöberg, Växjö, Sweden, Software, Architect, Developer, Full-stack"
+    />
+    <meta name="author" content="Andreas Sjöberg" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <title>Andreas Sjöberg</title>
+    <meta property="og:title" content="Andreas Sjöberg" />
+    <meta property="og:url" content="https://andreassjoberg.com" />
+    <meta property="og:description" content="Andreas Sjöberg" />
+    <meta property="og:image" content="https://andreassjoberg.com/me-256x256.webp" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image:alt" content="Andreas Sjöberg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Andreas Sjöberg" />
+    <meta name="twitter:url" content="https://andreassjoberg.com" />
+    <meta name="twitter:description" content="Andreas Sjöberg" />
+    <meta name="twitter:image" content="https://andreassjoberg.com/me-256x256.webp" />
+    <meta name="twitter:image:alt" content="Andreas Sjöberg" />
+    <meta name="twitter:creator" content="Andreas Sjöberg" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0JG0T8NN0E"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-0JG0T8NN0E');
+    </script>
     %sveltekit.head%
   </head>
-  <body data-sveltekit-preload-data="hover">
+  <body data-sveltekit-preload-data="hover" style="background-color: #333">
     <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>
