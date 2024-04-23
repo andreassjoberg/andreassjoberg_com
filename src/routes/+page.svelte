@@ -39,7 +39,8 @@
           If you're looking for someone to help your business towards your next target, feel free to contact me.
         </p>
         <p class="pt-2 text-xs italic">
-          Currently interested in roles as CTO, Domain Architect, Engineering Manager, or similar.
+          If you're looking for a CTO, Domain Architect, Engineering Manager, or similar, that's where I'll make the
+          most of my experience.
         </p>
         <p class="text-xs italic">
           In the right context, I'm also open to roles as a Senior Full-Stack Developer or similar.
