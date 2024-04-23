@@ -77,7 +77,7 @@
                 </path>
               </svg>
             </div>
-            <div class="stat-title text-slate-400 dark:text-slate-300">Years in tech</div>
+            <div class="stat-title text-slate-300">Years in tech</div>
             <div class="stat-value text-white">15+</div>
           </div>
 
@@ -93,7 +93,7 @@
                 </path>
               </svg>
             </div>
-            <div class="stat-title text-slate-400 dark:text-slate-300">Still learning?</div>
+            <div class="stat-title text-slate-300">Still learning?</div>
             <div class="stat-value text-white">YES!</div>
           </div>
         </div>
@@ -103,7 +103,7 @@
         <p class="pt-8 text-xl font-bold">Mini projects</p>
         <div class="join join-vertical w-4/5 mt-5">
           <div class="collapse collapse-arrow join-item bg-slate-700 dark:bg-slate-500 text-gray-100">
-            <input type="radio" name="projects" />
+            <input type="radio" name="projects" aria-label="Really simple randomizer" />
             <div class="collapse-title text-xl font-medium">Really simple randomizer</div>
             <div class="collapse-content text-sm">
               <p class="mb-3">Simple project for randomizing, works well for simple lotteries.</p>
@@ -111,7 +111,7 @@
             </div>
           </div>
           <div class="collapse collapse-arrow join-item bg-slate-700 dark:bg-slate-500 text-gray-100">
-            <input type="radio" name="projects" />
+            <input type="radio" name="projects" aria-label="Share a secret" />
             <div class="collapse-title text-xl font-medium">Share a secret</div>
             <div class="collapse-content text-sm">
               <p class="mb-3">Share a one-time secret with someone, using OpenPGP.</p>
