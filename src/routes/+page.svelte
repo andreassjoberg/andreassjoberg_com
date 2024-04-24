@@ -1,4 +1,15 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
+  let counter = 0;
+  onMount(() => {
+    const countdown = document.querySelector('.countdown > span') as HTMLSpanElement;
+    if (countdown) {
+      const value = Number(countdown.innerHTML);
+      counter = value;
+    }
+  });
+
   let show = false;
   let o = ['gmail.com', '@', 'andreassjoberg86'];
   $: e = show ? o[2] + o[1] + o[0] : '';
@@ -78,7 +89,11 @@
               </svg>
             </div>
             <div class="stat-title text-slate-300">Years in tech</div>
-            <div class="stat-value text-white">15+</div>
+            <div class="stat-value text-white">
+              <span class="countdown">
+                <span style="--value:{counter}">15</span>
+              </span>+
+            </div>
           </div>
 
           <div class="stat">
@@ -98,24 +113,33 @@
           </div>
         </div>
 
-        <div class="mx-auto w-4/5 py-3 border-b-2 border-slate-500 dark:border-slate-200 opacity-25" />
-
-        <p class="pt-8 text-xl font-bold">Mini projects</p>
-        <div class="join join-vertical w-4/5 mt-5">
-          <div class="collapse collapse-arrow join-item bg-slate-700 dark:bg-slate-500 text-gray-100">
-            <input type="radio" name="projects" aria-label="Really simple randomizer" />
-            <div class="collapse-title text-xl font-medium">Really simple randomizer</div>
-            <div class="collapse-content text-sm">
-              <p class="mb-3">Simple project for randomizing, works well for simple lotteries.</p>
-              <a href="https://andreassjoberg.com/randomizer" target="_blank" class="underline">Link</a>
+        <div class="flex flex-col mx-auto md:flex-row md:space-x-5 space-y-5 md:space-y-0 pt-5 max-w-96 md:max-w-none">
+          <div class="card w-full bg-slate-700 dark:bg-slate-500 text-gray-100">
+            <div class="card-body items-center text-center">
+              <h2 class="card-title">Really simple randomizer</h2>
+              <p>Simple project for randomizing, works well for simple lotteries.</p>
+              <div class="card-actions justify-end">
+                <a href="https://andreassjoberg.com/randomizer" target="_blank">
+                  <button
+                    class="bg-slate-500 hover:bg-slate-900 text-white dark:bg-slate-700 dark:hover:bg-slate-900 font-bold py-2 px-4 rounded-full"
+                    >Show me</button
+                  >
+                </a>
+              </div>
             </div>
           </div>
-          <div class="collapse collapse-arrow join-item bg-slate-700 dark:bg-slate-500 text-gray-100">
-            <input type="radio" name="projects" aria-label="Share a secret" />
-            <div class="collapse-title text-xl font-medium">Share a secret</div>
-            <div class="collapse-content text-sm">
-              <p class="mb-3">Share a one-time secret with someone, using OpenPGP.</p>
-              <a href="https://andreassjoberg.com/shareasecret" target="_blank" class="underline">Link</a>
+          <div class="card w-full bg-slate-700 dark:bg-slate-500 text-gray-100">
+            <div class="card-body items-center text-center">
+              <h2 class="card-title">Share a secret</h2>
+              <p>Share a one-time secret with someone, using OpenPGP.</p>
+              <div class="card-actions justify-end">
+                <a href="https://andreassjoberg.com/shareasecret" target="_blank">
+                  <button
+                    class="bg-slate-500 hover:bg-slate-900 text-white dark:bg-slate-700 dark:hover:bg-slate-900 font-bold py-2 px-4 rounded-full"
+                    >Show me</button
+                  >
+                </a>
+              </div>
             </div>
           </div>
         </div>
