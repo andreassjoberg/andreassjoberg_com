@@ -71,7 +71,7 @@
         </div>
 
         <div class="stats shadow stats-vertical md:stats-horizontal bg-slate-700 dark:bg-slate-500">
-          <div class="stat">
+          <div class="stat transition-colors duration-700 hover:bg-red-800">
             <div class="stat-figure">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@
             </div>
           </div>
 
-          <div class="stat">
+          <div class="stat transition-colors duration-700 hover:bg-indigo-700">
             <div class="stat-figure">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +114,9 @@
         </div>
 
         <div class="flex flex-col mx-auto md:flex-row md:space-x-5 space-y-5 md:space-y-0 pt-5 max-w-96 md:max-w-none">
-          <div class="card w-full bg-slate-700 dark:bg-slate-500 text-gray-100">
+          <div
+            class="card w-full bg-slate-700 dark:bg-slate-500 text-gray-100 transition-colors duration-700 hover:bg-purple-700"
+          >
             <div class="card-body items-center text-center">
               <h2 class="card-title">Really simple randomizer</h2>
               <p>Simple project for randomizing, works well for simple lotteries.</p>
@@ -128,7 +130,9 @@
               </div>
             </div>
           </div>
-          <div class="card w-full bg-slate-700 dark:bg-slate-500 text-gray-100">
+          <div
+            class="card w-full bg-slate-700 dark:bg-slate-500 text-gray-100 transition-colors hover:bg-orange-700 duration-700"
+          >
             <div class="card-body items-center text-center">
               <h2 class="card-title">Share a secret</h2>
               <p>Share a one-time secret with someone, using OpenPGP.</p>
