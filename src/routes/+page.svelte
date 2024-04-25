@@ -4,10 +4,17 @@
   let counter = 0;
   onMount(() => {
     const countdown = document.querySelector('.countdown > span') as HTMLSpanElement;
-    if (countdown) {
-      const value = Number(countdown.innerHTML);
-      counter = value;
-    }
+    const value = Number(countdown.innerHTML);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          counter = value;
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    observer.observe(countdown);
   });
 
   let show = false;
