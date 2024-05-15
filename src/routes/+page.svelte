@@ -48,28 +48,27 @@
 
         <h1 class="text-3xl font-bold pt-8">Andreas Sjöberg</h1>
         <div class="mx-auto w-4/5 pt-3 border-b-2 border-slate-500 dark:border-slate-200 opacity-25" />
-        <p class="pt-4 text-base font-bold">Building great things, by building great teams</p>
-        <p class="pt-8 text-sm">I believe great software helps businesses and individuals excel.</p>
+        <p class="pt-4 text-base font-bold">Let's do great things together</p>
+        <p class="pt-8 text-sm">
+          Welcome to my professional portfolio. I am a seasoned Software Architect dedicated to enhancing business
+          effectiveness, productivity, and usability through innovative technical solutions. With a deep understanding
+          of modern architectures and patterns, I specialize in bridging the gap between technical complexities and
+          business objectives.
+        </p>
         <p class="pt-2 text-sm">
-          Building great software requires great individuals, a great mindset and pshycological safety.
+          My approach is centered on empowering teams through mentoring and coaching, fostering collaboration and
+          driving results. I possess the technical knowledge to make informed decisions while prioritizing key areas for
+          sustainable growth. Crucially, I excel in communicating the impact of technological choices to stakeholders,
+          ensuring alignment between technology and business goals.
         </p>
-        <p class="pt-4 text-sm">
-          If you're looking for someone to help your business towards your next target, feel free to contact me.
-        </p>
-        <p class="pt-2 text-xs italic">
-          If you're looking for a CTO, Domain Architect, Engineering Manager, or similar, that's where I'll make the
-          most of my experience.
-        </p>
-        <p class="text-xs italic">
-          In the right context, I'm also open to roles as a Senior Full-Stack Developer or similar.
-        </p>
+        <p class="pt-2 text-sm italic">Let's explore how we can help each other grow.</p>
 
         <div class="pt-12 pb-8">
           {#if e}
             <a href={`mailto:${e}`} class="font-bold py-4">{e}</a>
           {:else}
             <button
-              class="bg-slate-700 hover:bg-slate-900 text-white dark:bg-slate-500 dark:hover:bg-slate-700 font-bold py-2 px-4 rounded-full"
+              class="bg-slate-700 hover:bg-slate-900 text-white dark:bg-slate-500 dark:hover:bg-slate-700 transition-colors duration-700 font-bold py-2 px-4 rounded-full"
               on:click={() => (show = !show)}
             >
               Get in touch
@@ -77,8 +76,8 @@
           {/if}
         </div>
 
-        <div class="stats shadow stats-vertical md:stats-horizontal bg-slate-700 dark:bg-slate-500">
-          <div class="stat transition-colors duration-700 hover:bg-red-800">
+        <div class="stats shadow stats-vertical md:stats-horizontal">
+          <div class="stat transition-colors duration-700 bg-slate-700 dark:bg-slate-500 hover:bg-red-800">
             <div class="stat-figure">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +102,7 @@
             </div>
           </div>
 
-          <div class="stat transition-colors duration-700 hover:bg-indigo-700">
+          <div class="stat transition-colors duration-700 bg-slate-700 dark:bg-slate-500 hover:bg-indigo-700">
             <div class="stat-figure">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
