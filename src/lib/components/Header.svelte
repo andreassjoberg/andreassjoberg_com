@@ -1,9 +1,15 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import { ChevronUp } from 'lucide-svelte';
 
-  export let currentSection: string = '';
+  interface Props {
+    currentSection?: string;
+  }
+
+  let { currentSection = $bindable('') }: Props = $props();
 
   const links = [
     { href: '#about', label: 'About' },
@@ -12,8 +18,8 @@
     { href: '#contact', label: 'Contact' }
   ];
 
-  let showBackToTop = false;
-  let scrollY = 0;
+  let showBackToTop = $state(false);
+  let scrollY = $state(0);
 
   onMount(() => {
     const handleScroll = () => {
@@ -58,7 +64,7 @@
       scrollToTop();
       return;
     }
-    
+
     const target = document.querySelector(href);
     if (target) {
       const headerHeight = 80;
@@ -74,10 +80,10 @@
   <nav class="max-w-6xl mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
       <!-- Logo/Name -->
-      <a 
-        href="#top" 
+      <a
+        href="#top"
         class="text-xl font-bold text-text hover:text-accent transition-colors duration-200"
-        on:click|preventDefault={() => scrollToTop()}
+        onclick={preventDefault(() => scrollToTop())}
       >
         Andreas Sjöberg
       </a>
@@ -89,10 +95,10 @@
             href={link.href}
             class="text-text-muted hover:text-text transition-colors duration-200 relative group"
             class:text-accent={currentSection === link.href.slice(1)}
-            on:click|preventDefault={() => handleClick(link.href)}
+            onclick={preventDefault(() => handleClick(link.href))}
           >
             {link.label}
-            <span 
+            <span
               class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-200 group-hover:w-full"
               class:w-full={currentSection === link.href.slice(1)}
             ></span>
@@ -104,7 +110,7 @@
       {#if showBackToTop}
         <button
           transition:fade={{ duration: 200 }}
-          on:click={scrollToTop}
+          onclick={scrollToTop}
           class="p-2 rounded-full bg-bg-card hover:bg-bg-hover border border-bg-border transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent"
           aria-label="Back to top"
         >
@@ -120,7 +126,7 @@
           href={link.href}
           class="text-sm text-text-muted hover:text-accent transition-colors duration-200"
           class:text-accent={currentSection === link.href.slice(1)}
-          on:click|preventDefault={() => handleClick(link.href)}
+          onclick={preventDefault(() => handleClick(link.href))}
         >
           {link.label}
         </a>

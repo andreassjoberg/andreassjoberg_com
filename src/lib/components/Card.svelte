@@ -2,12 +2,17 @@
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
 
-  export let className = '';
-  export let hover = true;
-  export let delay = 0;
+  interface Props {
+    className?: string;
+    hover?: boolean;
+    delay?: number;
+    children?: import('svelte').Snippet;
+  }
 
-  let cardElement: HTMLDivElement;
-  let isInView = false;
+  let { className = '', hover = true, delay = 0, children }: Props = $props();
+
+  let cardElement: HTMLDivElement | undefined = $state();
+  let isInView = $state(false);
 
   onMount(() => {
     if (!cardElement) return;
@@ -46,11 +51,11 @@
       class:transition-all={hover}
       class:duration-200={hover}
     >
-      <slot />
+      {@render children?.()}
     </div>
   {:else}
     <div class="opacity-0 rounded-2xl p-6 {className}">
-      <slot />
+      {@render children?.()}
     </div>
   {/if}
 </div>
