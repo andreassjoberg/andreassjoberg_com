@@ -26,36 +26,53 @@
           }
         });
       },
-      {
-        threshold: 0.1,
-        rootMargin: '50px'
-      }
+      { threshold: 0.08, rootMargin: '50px' }
     );
 
     observer.observe(cardElement);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   });
 </script>
 
 <div bind:this={cardElement}>
   {#if isInView}
     <div
-      transition:fly={{ y: 20, duration: 300, delay }}
-      class="rounded-2xl bg-bg-card border border-bg-border shadow-soft p-6 {className}"
-      class:hover:bg-bg-hover={hover}
-      class:hover:shadow-glow={hover}
-      class:hover:scale-[1.02]={hover}
-      class:transition-all={hover}
-      class:duration-200={hover}
+      transition:fly={{ y: 24, duration: 500, delay }}
+      class="card-shell {className}"
+      class:card-hover={hover}
     >
-      {@render children?.()}
+      <div class="card-inner">
+        {@render children?.()}
+      </div>
     </div>
   {:else}
-    <div class="opacity-0 rounded-2xl p-6 {className}">
+    <div class="opacity-0 {className}">
       {@render children?.()}
     </div>
   {/if}
 </div>
+
+<style>
+  .card-shell {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.01) 60%,
+      transparent 100%
+    );
+    border-radius: 1.25rem;
+    padding: 1px;
+  }
+
+  .card-inner {
+    background: var(--color-bg-card);
+    border-radius: calc(1.25rem - 1px);
+    padding: 1.75rem;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+
+</style>

@@ -3,28 +3,27 @@
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
-/* Custom theme tokens — replaces tailwind.config.js */
+/* Custom theme tokens */
 @theme {
-  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-sans: 'DM Sans', system-ui, sans-serif;
+  --font-family-heading: 'Syne', system-ui, sans-serif;
 
-  --color-bg: #121212;
-  --color-bg-card: #181818;
-  --color-bg-hover: #282828;
-  --color-bg-border: #2a2a2a;
+  --color-bg: #07070b;
+  --color-bg-card: #0f0f18;
+  --color-bg-hover: #141422;
+  --color-bg-border: #1c1c2c;
 
-  --color-text: #e5e5e5;
-  --color-text-muted: #b3b3b3;
+  --color-text: #e8e6f0;
+  --color-text-muted: #68668a;
 
-  --color-accent: #1db954;
+  --color-accent: #f59e0b;
 
-  --radius-xl2: 1.25rem;
-
-  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 0 3px rgba(29, 185, 84, 0.25);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 0 1px rgba(245, 158, 11, 0.18), 0 0 24px rgba(245, 158, 11, 0.08);
 }
 
-/* Safelist dynamic classes used in Card.svelte class: directives */
-@source inline("hover:bg-bg-hover hover:shadow-glow hover:scale-[1.02] transition-all duration-200 text-accent w-full");
+/* Safelist dynamic classes */
+@source inline("hover:bg-bg-hover hover:shadow-glow hover:scale-[1.02] transition-all duration-200 text-accent w-full font-heading");
 
 @layer base {
   html {
@@ -32,10 +31,24 @@
   }
 
   body {
-    @apply bg-black text-text font-sans;
+    @apply bg-bg text-text font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Ensure reduced motion is respected */
+  /* Grain overlay — fixed, pointer-events-none */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='4'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='200'%20height='200'%20filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -51,26 +64,125 @@
   }
 }
 
+/* ── Keyframe animations ─────────────────────────────────── */
+
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(40px, -45px) scale(1.07);
+  }
+  70% {
+    transform: translate(-22px, 28px) scale(0.95);
+  }
+}
+
+@keyframes float-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  35% {
+    transform: translate(-38px, 26px) scale(0.94);
+  }
+  68% {
+    transform: translate(26px, -32px) scale(1.06);
+  }
+}
+
+@keyframes ring-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes ring-pulse-outer {
+  0%,
+  100% {
+    opacity: 0.08;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer-tag {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* ── Reveal utility ──────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Button utilities ────────────────────────────────────── */
+
 @utility btn-primary {
-  @apply bg-accent text-black font-medium px-6 py-3 rounded-xl transition-all duration-200;
+  @apply inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-black font-semibold rounded-full text-sm transition-all duration-200;
 
   &:hover {
-    @apply bg-accent/90 scale-105;
+    @apply scale-[1.03];
+    background-color: color-mix(in srgb, var(--color-accent) 90%, white);
+    box-shadow: 0 0 22px rgba(245, 158, 11, 0.3);
   }
 
   &:focus {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-black;
+  }
+
+  &:active {
+    @apply scale-[0.97];
   }
 }
 
 @utility btn-secondary {
-  @apply bg-bg-card text-text border border-bg-border font-medium px-6 py-3 rounded-xl transition-all duration-200;
+  @apply inline-flex items-center gap-2 px-5 py-2.5 bg-transparent border border-bg-border text-text font-medium rounded-full text-sm transition-all duration-200;
 
   &:hover {
-    @apply bg-bg-hover scale-105;
+    @apply bg-bg-card border-text-muted/30 scale-[1.03];
   }
 
   &:focus {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-black;
+  }
+
+  &:active {
+    @apply scale-[0.97];
   }
 }

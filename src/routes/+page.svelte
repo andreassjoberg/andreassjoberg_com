@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { fly, fade } from 'svelte/transition';
-  import { Download, Mail, ExternalLink, Calendar, MapPin } from 'lucide-svelte';
+  import { fly } from 'svelte/transition';
+  import { Download, Mail, ExternalLink, MapPin } from 'lucide-svelte';
 
   import Header from '$lib/components/Header.svelte';
   import Section from '$lib/components/Section.svelte';
@@ -21,15 +21,14 @@
     e.preventDefault();
     const target = document.querySelector('#contact');
     if (target) {
-      const headerHeight = 80;
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 100;
       window.scrollTo({ top: targetPosition, behavior: 'smooth' });
     }
   };
 </script>
 
 <svelte:head>
-  <title>Andreas Sjöberg - Leverage technology for improvement</title>
+  <title>Andreas Sjöberg — Software Architect</title>
   <meta
     name="description"
     content="Transforming business goals into scalable, sustainable architectures — with clarity, trust and people at the center."
@@ -41,8 +40,7 @@
   <meta name="author" content="Andreas Sjöberg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Andreas Sjöberg - Leverage technology for improvement" />
+  <meta property="og:title" content="Andreas Sjöberg — Software Architect" />
   <meta
     property="og:description"
     content="Transforming business goals into scalable, sustainable architectures — with clarity, trust and people at the center."
@@ -50,20 +48,16 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://andreassjoberg.com" />
   <meta property="og:image" content="https://andreassjoberg.com/me-256x256.webp" />
-  <meta property="og:image:width" content="256" />
-  <meta property="og:image:height" content="256" />
   <meta property="og:locale" content="en_US" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Andreas Sjöberg - Leverage technology for improvement" />
+  <meta name="twitter:title" content="Andreas Sjöberg — Software Architect" />
   <meta
     name="twitter:description"
     content="Transforming business goals into scalable, sustainable architectures — with clarity, trust and people at the center."
   />
   <meta name="twitter:image" content="https://andreassjoberg.com/me-256x256.webp" />
 
-  <!-- Favicon -->
   <link rel="icon" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/me-256x256.webp" />
 </svelte:head>
@@ -71,79 +65,166 @@
 <Header bind:currentSection />
 
 <main>
-  <!-- Hero Section -->
-  <section id="hero" class="min-h-screen flex items-center justify-center pt-48 sm:pt-20">
-    <div class="max-w-6xl mx-auto px-6">
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <section
+    id="hero"
+    class="relative min-h-[100dvh] flex items-center overflow-hidden pt-20"
+    aria-label="Introduction"
+  >
+    <!-- Ambient orbs -->
+    <div aria-hidden="true" class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div
+        class="absolute rounded-full"
+        style="
+          width: 560px; height: 560px;
+          top: -120px; right: -80px;
+          background: radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 68%);
+          animation: float-a 22s ease-in-out infinite;
+          will-change: transform;
+        "
+      ></div>
+      <div
+        class="absolute rounded-full"
+        style="
+          width: 420px; height: 420px;
+          bottom: -60px; left: -80px;
+          background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+          animation: float-b 28s ease-in-out infinite;
+          will-change: transform;
+        "
+      ></div>
+      <div
+        class="absolute rounded-full"
+        style="
+          width: 300px; height: 300px;
+          top: 40%; left: 40%;
+          background: radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 70%);
+          animation: float-a 18s ease-in-out infinite reverse;
+          will-change: transform;
+        "
+      ></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6 w-full py-24">
       {#if heroVisible}
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           <!-- Content -->
-          <div transition:fly={{ x: -50, duration: 600, delay: 200 }}>
-            <h1 class="text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Andreas <span class="text-accent">Sjöberg</span>
+          <div transition:fly={{ x: -40, duration: 700, delay: 100 }}>
+            <!-- Eyebrow -->
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/8 mb-8"
+              style="animation: fade-up 0.6s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.1s"
+            >
+              <span class="w-1.5 h-1.5 rounded-full bg-accent" style="animation: ring-pulse 2.5s ease-in-out infinite;"></span>
+              <span class="text-accent text-[11px] font-medium uppercase tracking-[0.15em]">Software Architect · Svenska Spel</span>
+            </div>
+
+            <h1 class="font-heading text-5xl lg:text-7xl font-bold leading-[1.02] tracking-tight mb-5">
+              Andreas<br />
+              <span class="text-accent">Sjöberg</span>
             </h1>
-            <h2 class="text-xl lg:text-2xl text-text-muted mb-6 leading-relaxed">
+
+            <p class="text-xl lg:text-2xl text-text-muted font-light leading-relaxed mb-5">
               Leverage technology for improvement
-            </h2>
-            <p class="text-lg text-text-muted mb-8 leading-relaxed max-w-lg">
-              Transforming business goals into scalable, sustainable architectures — with clarity, trust and people at
-              the center.
             </p>
 
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4">
+            <p class="text-base text-text-muted leading-relaxed mb-10 max-w-[52ch]">
+              Transforming business goals into scalable, sustainable architectures — with clarity, trust and people
+              at the center.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3">
               <a
                 href="mailto:{contact.email}?subject=CV Request&body=Hi Andreas,%0D%0A%0D%0AI would like to receive your CV.%0D%0A%0D%0ABest regards,"
-                class="btn-primary flex items-center gap-2"
+                class="btn-primary"
               >
-                <Download class="w-5 h-5" />
+                <Download class="w-4 h-4" />
                 Request CV
               </a>
-              <a href="#contact" class="btn-secondary flex items-center gap-2" onclick={handleContactClick}>
-                <Mail class="w-5 h-5" />
+              <a href="#contact" class="btn-secondary" onclick={handleContactClick}>
+                <Mail class="w-4 h-4" />
                 Contact
               </a>
             </div>
           </div>
 
-          <!-- Profile Image -->
-          <div transition:fly={{ x: 50, duration: 600, delay: 400 }} class="flex justify-center lg:justify-end">
+          <!-- Profile image -->
+          <div transition:fly={{ x: 40, duration: 700, delay: 300 }} class="flex justify-center lg:justify-end">
             <div class="relative">
-              <div class="absolute inset-0 bg-accent/20 rounded-full blur-2xl scale-110"></div>
-              <img
-                src="/me-256x256.webp"
-                alt="Andreas Sjöberg"
-                class="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-accent/30 shadow-2xl"
-                loading="eager"
-                decoding="async"
-              />
+              <!-- Outer pulsing ring -->
+              <div
+                class="absolute rounded-full border border-accent/20"
+                style="inset: -24px; animation: ring-pulse-outer 4s ease-in-out infinite; will-change: transform, opacity;"
+              ></div>
+              <!-- Inner pulsing ring -->
+              <div
+                class="absolute rounded-full border border-accent/30"
+                style="inset: -10px; animation: ring-pulse 3.5s ease-in-out infinite 0.8s; will-change: transform, opacity;"
+              ></div>
+              <!-- Glow -->
+              <div
+                class="absolute inset-0 rounded-full"
+                style="background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%); filter: blur(20px); transform: scale(1.2);"
+              ></div>
+              <!-- Double-bezel image container -->
+              <div
+                class="relative z-10 p-1 rounded-full"
+                style="background: linear-gradient(135deg, rgba(245,158,11,0.35) 0%, rgba(245,158,11,0.05) 50%, transparent 100%);"
+              >
+                <div class="p-1 rounded-full" style="background: var(--color-bg);">
+                  <img
+                    src="/me-256x256.webp"
+                    alt="Andreas Sjöberg"
+                    class="w-56 h-56 lg:w-64 lg:h-64 rounded-full object-cover"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+
+        <!-- Scroll hint -->
+        <div
+          class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted/40"
+          style="animation: fade-up 1s ease both 1.2s;"
+        >
+          <span class="text-[10px] uppercase tracking-widest">Scroll</span>
+          <div class="w-px h-8 bg-gradient-to-b from-text-muted/30 to-transparent"></div>
         </div>
       {/if}
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- ── About ──────────────────────────────────────────── -->
   <Section id="about">
     <Card delay={100}>
-      <h2 class="text-3xl lg:text-4xl font-bold mb-6">{about.title}</h2>
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-bg-border bg-bg-hover mb-6">
+        <span class="text-text-muted text-[10px] font-medium uppercase tracking-[0.18em]">About</span>
+      </div>
 
-      <p class="text-lg text-text-muted leading-relaxed mb-6">
+      <h2 class="font-heading text-2xl lg:text-3xl font-bold leading-tight mb-6 max-w-[50ch]">
+        {about.title}
+      </h2>
+
+      <p class="text-base text-text-muted leading-relaxed mb-5 max-w-[70ch]">
         {about.intro}
       </p>
 
-      <div class="prose prose-lg prose-invert max-w-none mb-8">
+      <div class="mb-8 space-y-4">
         {#each about.description.split('\n\n') as paragraph}
-          <p class="text-text-muted leading-relaxed mb-4">{paragraph}</p>
+          <p class="text-sm text-text-muted leading-relaxed max-w-[72ch]">{paragraph}</p>
         {/each}
       </div>
 
-      <!-- Highlight Chips -->
-      <div class="flex flex-wrap gap-3">
-        {#each about.highlights as highlight, i}
+      <!-- Highlight chips -->
+      <div class="flex flex-wrap gap-2">
+        {#each about.highlights as highlight}
           <span
-            class="px-4 py-2 bg-accent/10 border border-accent/30 rounded-xl text-accent font-medium"
-            transition:fade={{ delay: 200 + i * 100 }}
+            class="px-3.5 py-1.5 rounded-full text-xs font-medium border transition-colors duration-200"
+            style="background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.22); color: var(--color-accent);"
           >
             {highlight}
           </span>
@@ -152,114 +233,167 @@
     </Card>
   </Section>
 
-  <!-- Experience Section -->
+  <!-- ── Experience ─────────────────────────────────────── -->
   <Section id="experience">
-    <Card delay={200}>
-      <h2 class="text-3xl lg:text-4xl font-bold mb-8">Experience</h2>
+    <Card delay={150}>
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-bg-border bg-bg-hover mb-6">
+        <span class="text-text-muted text-[10px] font-medium uppercase tracking-[0.18em]">Experience</span>
+      </div>
 
-      <div class="space-y-8">
-        {#each experience as job, i}
-          <div transition:fly={{ y: 20, duration: 300, delay: 300 + i * 100 }}>
-            <Card className="border-l-4 border-l-accent" hover={false}>
-              <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
-                <div>
-                  <h3 class="text-xl font-bold text-text">{job.role}</h3>
-                  <p class="text-accent font-medium">{job.company}</p>
-                  <p class="text-text-muted flex items-center gap-1">
-                    <MapPin class="w-4 h-4" />
-                    {job.location}
-                  </p>
-                </div>
-                <div class="flex items-center gap-1 text-text-muted">
-                  <Calendar class="w-4 h-4" />
-                  <span class="font-medium whitespace-nowrap">{job.period}</span>
-                </div>
-              </div>
+      <h2 class="font-heading text-2xl lg:text-3xl font-bold mb-10">Work History</h2>
 
-              <ul class="space-y-2 mb-6">
-                {#each job.bullets as bullet}
-                  <li class="text-text-muted leading-relaxed">
-                    <span class="text-accent mr-2">•</span>
-                    {bullet}
-                  </li>
-                {/each}
-              </ul>
+      <!-- Timeline -->
+      <div class="relative">
+        <!-- Vertical line -->
+        <div
+          class="absolute left-[7px] top-2 bottom-2 w-px"
+          style="background: linear-gradient(to bottom, rgba(245,158,11,0.5) 0%, rgba(245,158,11,0.1) 100%);"
+          aria-hidden="true"
+        ></div>
 
-              <div class="flex flex-wrap gap-2">
-                {#each job.skills as skill}
-                  <span class="px-3 py-1 bg-bg-hover border border-bg-border rounded-lg text-sm text-text-muted">
-                    {skill}
+        <div class="space-y-10 pl-7">
+          {#each experience as job, i}
+            <div
+              class="relative"
+              style="animation: fade-up 0.5s cubic-bezier(0.22,1,0.36,1) both; animation-delay: {i * 80}ms;"
+            >
+              <!-- Timeline dot -->
+              <div
+                class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full border-2 flex-shrink-0"
+                style="background: var(--color-bg-card); border-color: var(--color-accent); margin-left: -0.25rem;"
+                aria-hidden="true"
+              ></div>
+
+              <!-- Job block -->
+              <div class="group">
+                <!-- Header row -->
+                <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-1 mb-3">
+                  <div>
+                    <h3 class="font-heading font-bold text-text text-base leading-snug">{job.role}</h3>
+                    <p class="text-accent text-sm font-medium">{job.company}</p>
+                    <p class="text-text-muted text-xs mt-0.5 flex items-center gap-1">
+                      <MapPin class="w-3 h-3 flex-shrink-0" />
+                      {job.location}
+                    </p>
+                  </div>
+                  <span class="text-text-muted text-xs font-medium whitespace-nowrap mt-0.5 lg:mt-0 shrink-0">
+                    {job.period}
                   </span>
-                {/each}
+                </div>
+
+                <!-- Bullets -->
+                <ul class="space-y-1.5 mb-4">
+                  {#each job.bullets as bullet}
+                    <li class="text-text-muted text-sm leading-relaxed flex gap-2">
+                      <span class="text-accent mt-1.5 flex-shrink-0" style="font-size: 6px; line-height: 1;">&#9679;</span>
+                      {bullet}
+                    </li>
+                  {/each}
+                </ul>
+
+                <!-- Skill tags -->
+                <div class="flex flex-wrap gap-1.5">
+                  {#each job.skills as skill}
+                    <span
+                      class="px-2.5 py-1 rounded-full text-xs text-text-muted border border-bg-border bg-bg-hover transition-colors duration-200 hover:border-accent/25 hover:text-text"
+                    >
+                      {skill}
+                    </span>
+                  {/each}
+                </div>
               </div>
-            </Card>
-          </div>
-        {/each}
+            </div>
+          {/each}
+        </div>
       </div>
     </Card>
   </Section>
 
-  <!-- Education Section -->
+  <!-- ── Education ──────────────────────────────────────── -->
   <Section id="education">
-    <Card delay={400}>
-      <h2 class="text-3xl lg:text-4xl font-bold mb-8">Education</h2>
+    <Card delay={200}>
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-bg-border bg-bg-hover mb-6">
+        <span class="text-text-muted text-[10px] font-medium uppercase tracking-[0.18em]">Education</span>
+      </div>
 
-      {#each education as edu}
-        <Card className="border-l-4 border-l-accent" hover={false}>
-          <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
-            <div>
-              <h3 class="text-xl font-bold text-text">{edu.degree}</h3>
-              <p class="text-accent font-medium">{edu.school}</p>
-            </div>
-            <div class="flex items-center gap-1 text-text-muted">
-              <Calendar class="w-4 h-4" />
-              <span class="font-medium">{edu.period}</span>
-            </div>
-          </div>
+      <h2 class="font-heading text-2xl lg:text-3xl font-bold mb-10">Academic Background</h2>
 
-          <p class="text-text-muted leading-relaxed">
-            {edu.notes}
-          </p>
-        </Card>
-      {/each}
+      <div class="relative">
+        <div
+          class="absolute left-[7px] top-2 bottom-2 w-px"
+          style="background: linear-gradient(to bottom, rgba(245,158,11,0.5) 0%, rgba(245,158,11,0.1) 100%);"
+          aria-hidden="true"
+        ></div>
+
+        <div class="space-y-8 pl-7">
+          {#each education as edu}
+            <div class="relative" style="animation: fade-up 0.5s cubic-bezier(0.22,1,0.36,1) both;">
+              <!-- Timeline dot -->
+              <div
+                class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full border-2 flex-shrink-0"
+                style="background: var(--color-bg-card); border-color: var(--color-accent); margin-left: -0.25rem;"
+                aria-hidden="true"
+              ></div>
+
+              <div>
+                <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-1 mb-3">
+                  <div>
+                    <h3 class="font-heading font-bold text-text text-base leading-snug">{edu.degree}</h3>
+                    <p class="text-accent text-sm font-medium">{edu.school}</p>
+                  </div>
+                  <span class="text-text-muted text-xs font-medium whitespace-nowrap shrink-0">
+                    {edu.period}
+                  </span>
+                </div>
+                <p class="text-text-muted text-sm leading-relaxed">{edu.notes}</p>
+              </div>
+            </div>
+          {/each}
+        </div>
+      </div>
     </Card>
   </Section>
 
-  <!-- Contact Section -->
+  <!-- ── Contact ────────────────────────────────────────── -->
   <Section id="contact">
-    <Card delay={500}>
-      <h2 class="text-3xl lg:text-4xl font-bold mb-8 text-center">Contact</h2>
+    <Card delay={250}>
+      <div class="text-center max-w-2xl mx-auto py-6">
+        <!-- Eyebrow -->
+        <div
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-bg-border bg-bg-hover mb-6"
+        >
+          <span class="text-text-muted text-[10px] font-medium uppercase tracking-[0.18em]">Contact</span>
+        </div>
 
-      <div class="text-center max-w-2xl mx-auto">
-        <p class="text-lg text-text-muted mb-8 leading-relaxed">
+        <h2 class="font-heading text-3xl lg:text-4xl font-bold mb-4">Let's talk</h2>
+
+        <p class="text-text-muted leading-relaxed mb-10 max-w-[48ch] mx-auto">
           Let's discuss how we can collaborate to create future-proof solutions.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
-          <a
-            href="mailto:{contact.email}"
-            class="flex items-center gap-3 px-6 py-3 bg-accent hover:bg-accent/90 text-black font-medium rounded-xl transition-all duration-200 hover:scale-105"
-          >
-            <Mail class="w-5 h-5" />
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+          <a href="mailto:{contact.email}" class="btn-primary">
+            <Mail class="w-4 h-4" />
             Send Email
           </a>
-
           {#each contact.links as link}
             <a
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-3 px-6 py-3 bg-bg-card hover:bg-bg-hover border border-bg-border text-text font-medium rounded-xl transition-all duration-200 hover:scale-105"
+              class="btn-secondary"
             >
-              <ExternalLink class="w-5 h-5" />
+              <ExternalLink class="w-4 h-4" />
               {link.label}
             </a>
           {/each}
         </div>
 
-        <div class="flex items-center justify-center gap-2 text-text-muted">
-          <MapPin class="w-4 h-4" />
-          <span>{contact.location}</span>
+        <div class="flex items-center justify-center gap-1.5 text-text-muted text-sm">
+          <MapPin class="w-3.5 h-3.5" />
+          <span>{contact.location}, Sweden</span>
         </div>
       </div>
     </Card>
@@ -267,3 +401,5 @@
 </main>
 
 <Footer />
+
+
