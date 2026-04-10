@@ -2,8 +2,8 @@
   import { contact } from '$lib/data';
 </script>
 
-<footer class="border-t border-bg-border mt-8">
-  <div class="max-w-5xl mx-auto px-6 py-12">
+<footer class="border-t border-bg-border">
+  <div class="max-w-6xl mx-auto px-6 py-10">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
       <!-- Name + location -->
       <div class="text-center md:text-left">
@@ -15,9 +15,12 @@
       <div class="flex items-center gap-3">
         <a
           href="mailto:{contact.email}"
-          class="px-4 py-2 rounded-full border border-bg-border text-text-muted hover:text-accent hover:border-accent/30 text-xs transition-all duration-200 hover:bg-bg-card"
+          class="w-9 h-9 rounded-full border border-bg-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all duration-200 hover:bg-bg-card hover:scale-110"
+          aria-label="Email"
         >
-          {contact.email}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-9.75 6.75L2.25 6.75" />
+          </svg>
         </a>
         {#each contact.links as link}
           <a

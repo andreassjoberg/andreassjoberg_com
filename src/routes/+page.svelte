@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
-  import { Download, Mail, ExternalLink, MapPin } from 'lucide-svelte';
+  import { Download, Mail, MapPin } from 'lucide-svelte';
 
   import Header from '$lib/components/Header.svelte';
   import Section from '$lib/components/Section.svelte';
@@ -15,6 +15,22 @@
 
   onMount(() => {
     heroVisible = true;
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '50px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+    return () => revealObserver.disconnect();
   });
 
   const handleContactClick = (e: Event) => {
@@ -119,12 +135,12 @@
               <span class="text-accent text-[11px] font-medium uppercase tracking-[0.15em]">Software Architect · Svenska Spel</span>
             </div>
 
-            <h1 class="font-heading text-5xl lg:text-7xl font-bold leading-[1.02] tracking-tight mb-5">
+            <h1 class="font-heading text-5xl lg:text-7xl font-bold leading-[1.02] mb-5" style="letter-spacing: -0.035em;">
               Andreas<br />
               <span class="text-accent">Sjöberg</span>
             </h1>
 
-            <p class="text-xl lg:text-2xl text-text-muted font-light leading-relaxed mb-5">
+            <p class="text-xl lg:text-2xl text-text-muted font-normal leading-relaxed mb-5">
               Leverage technology for improvement
             </p>
 
@@ -198,40 +214,41 @@
   </section>
 
   <!-- ── About ──────────────────────────────────────────── -->
-  <Section id="about">
-    <Card delay={100}>
-      <!-- Eyebrow -->
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-bg-border bg-bg-hover mb-6">
-        <span class="text-text-muted text-[10px] font-medium uppercase tracking-[0.18em]">About</span>
+  <section id="about" class="max-w-6xl mx-auto px-6 py-28">
+    <div class="reveal grid lg:grid-cols-[180px_1fr] gap-12 lg:gap-20">
+      <!-- Left: sticky label -->
+      <div class="hidden lg:block">
+        <div class="sticky top-28 pt-1">
+          <span class="text-[10px] uppercase tracking-[0.2em] text-text-muted block mb-3">About</span>
+          <div class="w-6 h-px" style="background: var(--color-accent); opacity: 0.35;"></div>
+        </div>
       </div>
-
-      <h2 class="font-heading text-2xl lg:text-3xl font-bold leading-tight mb-6 max-w-[50ch]">
-        {about.title}
-      </h2>
-
-      <p class="text-base text-text-muted leading-relaxed mb-5 max-w-[70ch]">
-        {about.intro}
-      </p>
-
-      <div class="mb-8 space-y-4">
-        {#each about.description.split('\n\n') as paragraph}
-          <p class="text-sm text-text-muted leading-relaxed max-w-[72ch]">{paragraph}</p>
-        {/each}
+      <!-- Right: content -->
+      <div>
+        <h2 class="font-heading text-3xl lg:text-[2.6rem] font-bold leading-tight mb-8">
+          {about.title}
+        </h2>
+        <p class="text-base lg:text-lg text-text-muted leading-relaxed mb-6 max-w-[60ch]">
+          {about.intro}
+        </p>
+        <div class="mb-10 space-y-4">
+          {#each about.description.split('\n\n') as paragraph}
+            <p class="text-sm text-text-muted leading-relaxed max-w-[68ch]">{paragraph}</p>
+          {/each}
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {#each about.highlights as highlight}
+            <span
+              class="px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors duration-200"
+              style="background: rgba(245,158,11,0.1); color: var(--color-accent);"
+            >
+              {highlight}
+            </span>
+          {/each}
+        </div>
       </div>
-
-      <!-- Highlight chips -->
-      <div class="flex flex-wrap gap-2">
-        {#each about.highlights as highlight}
-          <span
-            class="px-3.5 py-1.5 rounded-full text-xs font-medium border transition-colors duration-200"
-            style="background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.22); color: var(--color-accent);"
-          >
-            {highlight}
-          </span>
-        {/each}
-      </div>
-    </Card>
-  </Section>
+    </div>
+  </section>
 
   <!-- ── Experience ─────────────────────────────────────── -->
   <Section id="experience">
@@ -260,8 +277,8 @@
             >
               <!-- Timeline dot -->
               <div
-                class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full border-2 flex-shrink-0"
-                style="background: var(--color-bg-card); border-color: var(--color-accent); margin-left: -0.25rem;"
+                class="absolute -left-7 top-1.5 w-2.5 h-2.5 rounded-full flex-shrink-0"
+                style="background: var(--color-accent); opacity: 0.85; box-shadow: 0 0 8px rgba(245,158,11,0.35);"
                 aria-hidden="true"
               ></div>
 
@@ -332,8 +349,8 @@
             <div class="relative" style="animation: fade-up 0.5s cubic-bezier(0.22,1,0.36,1) both;">
               <!-- Timeline dot -->
               <div
-                class="absolute -left-7 top-1 w-3.5 h-3.5 rounded-full border-2 flex-shrink-0"
-                style="background: var(--color-bg-card); border-color: var(--color-accent); margin-left: -0.25rem;"
+                class="absolute -left-7 top-1.5 w-2.5 h-2.5 rounded-full flex-shrink-0"
+                style="background: var(--color-accent); opacity: 0.85; box-shadow: 0 0 8px rgba(245,158,11,0.35);"
                 aria-hidden="true"
               ></div>
 
@@ -357,47 +374,47 @@
   </Section>
 
   <!-- ── Contact ────────────────────────────────────────── -->
-  <Section id="contact">
-    <Card delay={250}>
-      <div class="text-center max-w-2xl mx-auto py-6">
-        <!-- Eyebrow -->
-        <div
-          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-bg-border bg-bg-hover mb-6"
-        >
-          <span class="text-text-muted text-[10px] font-medium uppercase tracking-[0.18em]">Contact</span>
-        </div>
-
-        <h2 class="font-heading text-3xl lg:text-4xl font-bold mb-4">Let's talk</h2>
-
-        <p class="text-text-muted leading-relaxed mb-10 max-w-[48ch] mx-auto">
-          Let's discuss how we can collaborate to create future-proof solutions.
+  <section id="contact" class="border-t border-bg-border mt-4">
+    <div class="max-w-6xl mx-auto px-6 py-32">
+      <div class="reveal max-w-3xl">
+        <span class="text-[10px] uppercase tracking-[0.2em] text-text-muted block mb-10">Contact</span>
+        <h2 class="font-heading text-5xl lg:text-[5.5rem] font-bold leading-none mb-8" style="letter-spacing: -0.03em;">
+          Let's work<br />together.
+        </h2>
+        <p class="text-base text-text-muted leading-relaxed mb-14 max-w-[52ch]">
+          Open to discussing architecture, leadership, and new opportunities.
         </p>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
-          <a href="mailto:{contact.email}" class="btn-primary">
-            <Mail class="w-4 h-4" />
-            Send Email
-          </a>
+        <a
+          href="mailto:{contact.email}"
+          class="group inline-flex items-center gap-4 mb-12"
+        >
+          <span class="font-heading text-xl lg:text-2xl font-semibold text-text group-hover:text-accent transition-colors duration-300">
+            Get in touch
+          </span>
+          <span
+            class="w-10 h-10 rounded-full border border-text-muted/20 flex items-center justify-center text-text-muted group-hover:border-accent group-hover:text-accent group-hover:translate-x-1 transition-all duration-300"
+            aria-hidden="true"
+          >→</span>
+        </a>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text-muted">
+          <span class="flex items-center gap-1.5">
+            <MapPin class="w-3.5 h-3.5 flex-shrink-0" />
+            {contact.location}, Sweden
+          </span>
           {#each contact.links as link}
             <a
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="btn-secondary"
+              class="hover:text-text transition-colors duration-200"
             >
-              <ExternalLink class="w-4 h-4" />
-              {link.label}
+              {link.label} ↗
             </a>
           {/each}
         </div>
-
-        <div class="flex items-center justify-center gap-1.5 text-text-muted text-sm">
-          <MapPin class="w-3.5 h-3.5" />
-          <span>{contact.location}, Sweden</span>
-        </div>
       </div>
-    </Card>
-  </Section>
+    </div>
+  </section>
 </main>
 
 <Footer />

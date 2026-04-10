@@ -65,6 +65,21 @@
     padding: 1px;
   }
 
+  .card-hover {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-3px);
+  }
+
+  .card-hover:hover .card-inner {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
   .card-inner {
     background: var(--color-bg-card);
     border-radius: calc(1.25rem - 1px);

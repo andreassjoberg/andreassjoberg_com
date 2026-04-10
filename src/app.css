@@ -5,7 +5,7 @@
 
 /* Custom theme tokens */
 @theme {
-  --font-family-sans: 'DM Sans', system-ui, sans-serif;
+  --font-family-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-family-heading: 'Syne', system-ui, sans-serif;
 
   --color-bg: #07070b;
@@ -34,6 +34,16 @@
     @apply bg-bg text-text font-sans;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   /* Grain overlay — fixed, pointer-events-none */
