@@ -369,6 +369,22 @@
     };
   };
 
+  const trackRandomization = (
+    entryCount: number,
+    submittedWinnerCount: number,
+    submittedRewardCount: number,
+    usesWeakRandomization: boolean
+  ) => {
+    if (typeof window === 'undefined') return;
+
+    window.gtag?.('event', 'randomizer_randomize', {
+      entry_count: entryCount,
+      winner_count: submittedWinnerCount,
+      reward_count: submittedRewardCount,
+      uses_weak_randomization: usesWeakRandomization
+    });
+  };
+
   const placeToString = (place: number) => {
     const lastTwoDigits = place % 100;
     const lastDigit = place % 10;
@@ -434,6 +450,13 @@
           winnerCount: nextWinnerCount,
           rewardCounts: normalizedRewards
         });
+
+        trackRandomization(
+          names.length,
+          nextWinnerCount,
+          normalizedRewards.reduce((total, rewardCount) => total + rewardCount, 0),
+          randomized.usesWeakRandomization
+        );
 
         addToast('Randomization complete!', 'success');
 
